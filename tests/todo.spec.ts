@@ -10,6 +10,17 @@ test.describe('Lista de tareas', () => {
 
     const taskInput = page.getByPlaceholder('What needs to be done?');
 
+    await taskInput.fill('Task: 1');
+    await taskInput.press('Enter');
+
+    await expect(page.getByTestId('todo-title')).toHaveText('Task: 1');
+
+  });
+
+  test('agregar 3 tareas', async ({ page }) => {
+
+    const taskInput = page.getByPlaceholder('What needs to be done?');
+
     const qty = 3;
 
     for (let i = 1; i <= qty; i++) {
@@ -17,7 +28,6 @@ test.describe('Lista de tareas', () => {
       await taskInput.fill(`Task: ${i}`);
       await taskInput.press('Enter');
     }
-
 
     await expect(page.getByTestId('todo-title')).toHaveText([
       'Task: 1',
